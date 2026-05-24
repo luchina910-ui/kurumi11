@@ -113,7 +113,7 @@ async function initIndustrialGis() {
                     <div class="house-main-content">
                         <div class="house-image-section">
                             <img src="${obj.photo || ''}" class="house-img-pro" onerror="this.src='/dom56.jpg'">
-                            <b style="font-size:22px; color:#008000; display:block; text-align:center; font-weight:900; padding: 10px 0;">🏠 ${obj.address}</b>
+                            <div class="house-title">🏠 ${obj.address}</div>
                         </div>
                         <div class="house-info-section">
                             <div class="house-info-grid">
@@ -128,7 +128,7 @@ async function initIndustrialGis() {
                             </div>
                         </div>
                     </div>
-                    <div style="display:grid; grid-template-columns: 1fr 1fr; gap:15px; margin-top: 10px;">
+                    <div style="display:grid; grid-template-columns: 1fr 1fr; gap:15px; padding: 20px 30px 30px 30px;">
                         <button class="ui-btn" style="background: linear-gradient(135deg, #3498db 0%, #2980b9 100%); color:#fff;" onclick="window.openCamera()">🎥 КАМЕРА</button>
                         <button class="ui-btn" style="background: linear-gradient(135deg, #d9534f 0%, #c9302c 100%); color:#fff;" onclick="window.openComplaintAction('${obj.address}')">🚨 ЖАЛОБА</button>
                     </div>
@@ -139,10 +139,10 @@ async function initIndustrialGis() {
             }, {
                 preset: 'islands#greenHomeCircleIcon',
                 iconScale: 1.8,
-                balloonMinWidth: 430,
-                balloonMaxWidth: 450,
-                balloonMinHeight: 550,
-                balloonMaxHeight: 650,
+                balloonMinWidth: 850,
+                balloonMaxWidth: 900,
+                balloonMinHeight: 450,
+                balloonMaxHeight: 550,
                 balloonPanelMaxMapArea: 0
             });
             layers.hM.push(m);
