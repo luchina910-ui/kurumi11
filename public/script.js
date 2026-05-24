@@ -57,40 +57,71 @@ async function initIndustrialGis() {
         const sub = document.getElementById('sub-modal-body');
         if (!sub) return;
         const ticketNum = "Ж-" + (Math.floor(Math.random() * 9000) + 1000);
+        const fio = document.getElementById('f-fio')?.value || 'Аноним';
+        const tel = document.getElementById('f-tel')?.value || 'Не указан';
+        const reason = document.getElementById('f-reason')?.value || 'Не указано';
+        const desc = document.getElementById('f-desc')?.value || 'Нет описания';
+        
         sub.innerHTML = `
-            <div class="success-popup" style="padding: 60px; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%;">
+            <div class="success-popup" style="padding: 50px; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%;">
                 <span class="success-icon">✅</span>
-                <h1 style="color:#008000; font-size: 35px; margin-bottom: 10px;">ОТПРАВЛЕНО!</h1>
-                <p style="font-size: 20px; color: #333; margin-bottom: 20px;">Ваша жалоба принята диспетчером.</p>
-                <div style="background: #f0fdf0; padding: 15px 30px; border-radius: 20px; border: 2px dashed #008000; font-weight: 900; font-size: 24px;">
-                    № ${ticketNum}
+                <h1 style="color:#008000; font-size: 38px; margin-bottom: 15px; font-weight:900;">ОТПРАВЛЕНО!</h1>
+                <p style="font-size: 18px; color: #333; margin-bottom: 25px;">Ваша жалоба принята диспетчером</p>
+                
+                <div style="background: #fff; padding: 30px; border-radius: 25px; border: 3px solid #008000; width: 100%; max-width: 500px; box-shadow: 0 10px 40px rgba(0,128,0,0.15);">
+                    <div style="text-align:center; margin-bottom:20px;">
+                        <span style="font-size:14px; color:#888;">Номер заявки</span>
+                        <div style="background: linear-gradient(135deg, #008000 0%, #00aa44 100%); color: #fff; padding: 12px 30px; border-radius: 15px; font-weight: 900; font-size: 28px; display: inline-block; margin-top:8px;">
+                            ${ticketNum}
+                        </div>
+                    </div>
+                    
+                    <div style="text-align:left; font-size:15px; line-height:1.8;">
+                        <div style="display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid #e8efe8;">
+                            <span style="color:#666;">Заявитель:</span>
+                            <b style="color:#008000;">${fio}</b>
+                        </div>
+                        <div style="display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid #e8efe8;">
+                            <span style="color:#666;">Телефон:</span>
+                            <b style="color:#008000;">${tel}</b>
+                        </div>
+                        <div style="display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid #e8efe8;">
+                            <span style="color:#666;">Причина:</span>
+                            <b style="color:#008000;">${reason}</b>
+                        </div>
+                        <div style="padding:10px 0;">
+                            <span style="color:#666; display:block; margin-bottom:5px;">Описание:</span>
+                            <p style="margin:0; color:#333; background:#f9fbf9; padding:12px; border-radius:12px;">${desc}</p>
+                        </div>
+                    </div>
                 </div>
-                <p style="font-size: 14px; color: #888; margin-top: 20px;">Ожидайте звонка в течение 30 минут.</p>
-                <button class="ui-btn" style="margin-top: 30px; background: #008000; color: #fff; width: 250px;" onclick="window.closeEverything()">ОТЛИЧНО</button>
+                
+                <p style="font-size: 15px; color: #888; margin-top: 25px; text-align:center;">⏱️ Ожидайте звонка в течение <b style="color:#008000;">30 минут</b></p>
+                <button class="ui-btn" style="margin-top: 25px; background: linear-gradient(135deg, #008000 0%, #00aa44 100%); color: #fff; width: 280px; height: 60px; font-size: 16px;" onclick="window.closeEverything()">ПОНЯТНО</button>
             </div>
         `;
         sub.style.display = "block";
         setTimeout(() => {
             if(sub.style.display === "block") window.closeEverything();
-        }, 5000);
+        }, 8000);
     };
 
     db.forEach(obj => {
         if (obj.id?.startsWith('h')) {
             const hHtml = `
                 <div class="house-card-pro">
-                    <img src="${obj.photo || ''}" class="house-img-pro">
-                    <b style="font-size:20px; color:#008000; display:block; margin-bottom:10px; text-align:center;">🏠 ${obj.address}</b>
-                    <div style="display:grid; grid-template-columns: 1fr 1fr; gap:6px;">
-                        <div class="info-row">🏗️ ${obj.year} год постройки</div>
-                        <div class="info-row">🏢 ${obj.floors} эт. у дома</div>
-                        <div class="info-row">🧱 ${obj.material || 'Монолит'}</div>
-                        <div class="info-row">📡 ${obj.elevator || 'Falcon'}</div>
-                        <div class="info-row" style="grid-column: span 2;">️ ${obj.developer || 'Застройщик'}</div>
-                        <div class="info-row" style="grid-column: span 2;">📐 ${obj.area || 'N/A'} / ${obj.apartments || 'N/A'} кв.</div>
-                        <div class="info-row" style="grid-column: span 2;">🏘️ Серия: ${obj.series || 'Типовая'}</div>
+                    <img src="${obj.photo || ''}" class="house-img-pro" onerror="this.src='/dom56.jpg'">
+                    <b style="font-size:20px; color:#008000; display:block; margin-bottom:15px; text-align:center; font-weight:900;">🏠 ${obj.address}</b>
+                    <div style="display:flex; flex-direction:column; gap:8px;">
+                        <div class="info-row"><span>🏗️ Год постройки:</span><span>${obj.year}</span></div>
+                        <div class="info-row"><span>🏢 Этажей:</span><span>${obj.floors} эт.</span></div>
+                        <div class="info-row"><span>🧱 Материал:</span><span>${obj.material || 'Монолит'}</span></div>
+                        <div class="info-row"><span>📡 Лифты:</span><span>${obj.elevator || 'Falcon'}</span></div>
+                        <div class="info-row"><span>🏗️ Застройщик:</span><span>${obj.developer || 'Застройщик'}</span></div>
+                        <div class="info-row"><span>📐 Площадь / Кв.:</span><span>${obj.area || 'N/A'} / ${obj.apartments || 'N/A'}</span></div>
+                        <div class="info-row"><span>🏘️ Серия:</span><span>${obj.series || 'Типовая'}</span></div>
                     </div>
-                    <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px; margin-top:12px;">
+                    <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px; margin-top:15px;">
                         <button class="ui-btn" style="background:#3498db; color:#fff;" onclick="window.openCamera()">КАМЕРА</button>
                         <button class="ui-btn" style="background:#d9534f; color:#fff;" onclick="window.openComplaintAction('${obj.address}')">ЖАЛОБА</button>
                     </div>
@@ -409,7 +440,7 @@ window.openEcoGuide = () => {
     function id(i) { return document.getElementById(i); }
     
 const gui = document.createElement('div');
-gui.id = "eco-panel-root";
+gui.id = "eco-panel-top-root";
 gui.className = "premium-card";
 gui.innerHTML = `
     <div class="eco-header">🌿 ЭКОСИСТЕМА ДВОРА</div>
@@ -509,4 +540,74 @@ window.showQR = () => {
 };
 
 refreshL();
+}
+// ✅ ЛОГОТИП КЛИКАБЕЛЬНЫЙ - ИНФОРМАЦИЯ ОБ УК
+const logoTrigger = document.getElementById('logo-trigger');
+if (logoTrigger) {
+    logoTrigger.addEventListener('click', () => {
+        window.openModal('ℹ️ ООО «УК ВСЕ СВОИ»', `
+            <div class="uk-info-container">
+                <div class="uk-info-header">
+                    <h2>🏢 ООО «УК ВСЕ СВОИ»</h2>
+                    <p class="subtitle">Ваш надёжный партнёр в управлении недвижимостью</p>
+                </div>
+                
+                <div class="uk-info-grid">
+                    <div class="uk-info-card">
+                        <h3>📅 Год основания</h3>
+                        <p><b>2015 год</b> — более 9 лет успешной работы на рынке управления недвижимостью</p>
+                    </div>
+                    <div class="uk-info-card">
+                        <h3>🏘️ Управляем</h3>
+                        <p><b>11 домов</b> общей площадью более 45 000 м², обслуживаем свыше 800 квартир</p>
+                    </div>
+                    <div class="uk-info-card">
+                        <h3>👥 Команда</h3>
+                        <p><b>25 специалистов</b> — инженеры, сантехники, электрики, дворники, диспетчеры</p>
+                    </div>
+                    <div class="uk-info-card">
+                        <h3>📞 Диспетчерская</h3>
+                        <p><b>+7 (921) 482-85-50</b> — работаем круглосуточно, без выходных и праздников</p>
+                    </div>
+                </div>
+                
+                <div class="uk-values-section">
+                    <h3>💚 НАШИ ЦЕННОСТИ</h3>
+                    <div class="uk-values-list">
+                        <div class="uk-value-item">
+                            <span class="icon">🤝</span>
+                            <span class="text">Доверие жильцов — наш главный актив</span>
+                        </div>
+                        <div class="uk-value-item">
+                            <span class="icon">⚡</span>
+                            <span class="text">Оперативное решение любых вопросов</span>
+                        </div>
+                        <div class="uk-value-item">
+                            <span class="icon">🌿</span>
+                            <span class="text">Экологичность и чистота дворов</span>
+                        </div>
+                        <div class="uk-value-item">
+                            <span class="icon">💎</span>
+                            <span class="text">Прозрачность всех начислений</span>
+                        </div>
+                        <div class="uk-value-item">
+                            <span class="icon">🔧</span>
+                            <span class="text">Современные технологии обслуживания</span>
+                        </div>
+                        <div class="uk-value-item">
+                            <span class="icon">❤️</span>
+                            <span class="text">Забота о каждом жителе дома</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="text-align:center; margin-top:35px; padding:25px; background:linear-gradient(135deg, #f0fdf0 0%, #e0f7e0 100%); border-radius:25px; border:2px dashed #008000;">
+                    <p style="font-size:18px; color:#008000; font-weight:800; margin:0;">
+                        🙏 СПАСИБО, ЧТО ВЫБИРАЕТЕ НАС!<br>
+                        <span style="font-size:14px; color:#666; font-weight:600;">Мы ценим ваше доверие и работаем для вашего комфорта каждый день</span>
+                    </p>
+                </div>
+            </div>
+        `);
+    });
 }
