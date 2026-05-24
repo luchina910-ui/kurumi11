@@ -307,23 +307,70 @@ window.openEcoGuide = () => {
     ];
 
     const html = `
-        <div style="font-family: 'Montserrat', sans-serif; padding: 10px; max-width: 960px; margin: 0 auto;">
-            <h2 style="text-align: center; color: #008000; font-size: 38px; margin: 0 0 30px 0; font-weight: 900; letter-spacing: 1px;">🌿 ЭКО-ГИД ЖИЛЬЦА</h2>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(310px, 1fr)); gap: 20px;">
-                ${cards.map(c => `
-                    <div style="background: #ffffff; border-radius: 24px; padding: 22px; border-left: 8px solid ${c.color}; box-shadow: 0 6px 18px rgba(0,0,0,0.08); display: flex; flex-direction: column; gap: 12px; transition: transform 0.2s ease, box-shadow 0.2s ease;">
-                        <h3 style="margin: 0; font-size: 20px; color: #111; font-weight: 800;">${c.icon} ${c.title}</h3>
-                        <p style="margin: 0; font-size: 14.5px; line-height: 1.6; color: #444;">${c.desc}</p>
+        <div class="eco-guide-container" style="font-family: 'Montserrat', sans-serif; padding: 20px;">
+            <div class="eco-guide-header" style="text-align: center; margin-bottom: 40px; position: relative;">
+                <h2 style="color: var(--primary); font-size: 42px; margin: 0 0 10px 0; font-weight: 900; letter-spacing: 2px; text-transform: uppercase; background: linear-gradient(135deg, #008000 0%, #00ff88 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+                    🌿 ЭКО-ГИД ЖИЛЬЦА
+                </h2>
+                <p style="color: #666; font-size: 16px; margin: 0; font-weight: 600;">Ваш персональный помощник по экологии двора</p>
+                <div style="width: 100px; height: 4px; background: linear-gradient(90deg, #008000, #00ff88); margin: 20px auto 0; border-radius: 2px;"></div>
+            </div>
+            
+            <div class="eco-cards-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; max-width: 1400px; margin: 0 auto;">
+                ${cards.map((c, index) => `
+                    <div class="eco-card-item" style="
+                        background: linear-gradient(135deg, #ffffff 0%, #f8faf8 100%);
+                        border-radius: 28px;
+                        padding: 28px;
+                        border-left: 6px solid ${c.color};
+                        box-shadow: 0 8px 25px rgba(0,0,0,0.08), inset 0 1px 0 rgba(255,255,255,0.8);
+                        display: flex;
+                        flex-direction: column;
+                        gap: 15px;
+                        transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+                        position: relative;
+                        overflow: hidden;
+                        animation: ecoCardFadeIn 0.5s ease-out ${index * 0.05}s both;
+                    "
+                    onmouseover="this.style.transform='translateY(-8px) scale(1.02)'; this.style.boxShadow='0 15px 40px rgba(0,128,0,0.15), inset 0 1px 0 rgba(255,255,255,0.8)'"
+                    onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 8px 25px rgba(0,0,0,0.08), inset 0 1px 0 rgba(255,255,255,0.8)'">
+                        <div style="position: absolute; top: -20px; right: -20px; width: 80px; height: 80px; background: radial-gradient(circle, ${c.color}22 0%, transparent 70%); border-radius: 50%;"></div>
+                        <h3 style="margin: 0; font-size: 22px; color: #111; font-weight: 800; display: flex; align-items: center; gap: 10px; position: relative; z-index: 1;">
+                            <span style="font-size: 32px; filter: drop-shadow(0 3px 8px ${c.color}44);">${c.icon}</span>
+                            ${c.title}
+                        </h3>
+                        <p style="margin: 0; font-size: 15px; line-height: 1.7; color: #444; position: relative; z-index: 1;">${c.desc}</p>
                     </div>
                 `).join('')}
             </div>
-            <div style="text-align: center; margin-top: 35px; padding: 22px; background: linear-gradient(135deg, #f0fdf0 0%, #ffffff 100%); border-radius: 22px; border: 2px dashed #008000;">
-                <p style="margin: 0; font-size: 17px; color: #008000; font-weight: 700;">💚 Спасибо, что делаете наш двор чище вместе с УК «ВСЕ СВОИ»!</p>
+            
+            <div class="eco-footer" style="text-align: center; margin-top: 50px; padding: 35px; background: linear-gradient(135deg, #f0fdf0 0%, #e0f7e0 50%, #f0fdf0 100%); border-radius: 30px; border: 3px dashed var(--primary); position: relative; overflow: hidden;">
+                <div style="position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(0,128,0,0.05) 0%, transparent 70%); animation: ecoGlow 4s ease-in-out infinite;"></div>
+                <p style="margin: 0; font-size: 20px; color: var(--primary); font-weight: 800; position: relative; z-index: 1; letter-spacing: 1px;">
+                    💚 Спасибо, что делаете наш двор чище вместе с УК «ВСЕ СВОИ»!
+                </p>
+                <p style="margin: 10px 0 0 0; font-size: 14px; color: #888; position: relative; z-index: 1;">
+                    Вместе мы создаём экологичное будущее
+                </p>
             </div>
         </div>
+        
+        <style>
+            @keyframes ecoCardFadeIn {
+                from { opacity: 0; transform: translateY(30px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+            @keyframes ecoGlow {
+                0%, 100% { transform: translate(0, 0) scale(1); }
+                50% { transform: translate(-10px, -10px) scale(1.05); }
+            }
+            .eco-guide-container::-webkit-scrollbar { width: 8px; }
+            .eco-guide-container::-webkit-scrollbar-track { background: #f0f0f0; border-radius: 4px; }
+            .eco-guide-container::-webkit-scrollbar-thumb { background: linear-gradient(135deg, #008000, #00aa44); border-radius: 4px; }
+        </style>
     `;
 
-    window.openModal('', html); // Пустой заголовок, чтобы не дублировать большой h1 из openModal
+    window.openModal('', html);
 };
 
     window.runAction = (act) => {
