@@ -110,21 +110,27 @@ async function initIndustrialGis() {
         if (obj.id?.startsWith('h')) {
             const hHtml = `
                 <div class="house-card-pro">
-                    <img src="${obj.photo || ''}" class="house-img-pro" onerror="this.src='/dom56.jpg'">
-                    <b style="font-size:20px; color:#008000; display:block; margin-bottom:15px; text-align:center; font-weight:900;">🏠 ${obj.address}</b>
-                    <div class="house-info-grid">
-                        <div class="info-row-compact"><span>🏗️ Год</span><span>${obj.year}</span></div>
-                        <div class="info-row-compact"><span>🏢 Этажей</span><span>${obj.floors} эт.</span></div>
-                        <div class="info-row-compact"><span>🧱 Материал</span><span>${obj.material || 'Монолит'}</span></div>
-                        <div class="info-row-compact"><span>📡 Лифты</span><span>${obj.elevator || 'Falcon'}</span></div>
-                        <div class="info-row-compact"><span>🏗️ Застройщик</span><span>${obj.developer || 'Застройщик'}</span></div>
-                        <div class="info-row-compact"><span>📐 Площадь</span><span>${obj.area || 'N/A'}</span></div>
-                        <div class="info-row-compact"><span>🏘️ Серия</span><span>${obj.series || 'Типовая'}</span></div>
-                        <div class="info-row-compact"><span>🔑 Кв.</span><span>${obj.apartments || 'N/A'}</span></div>
+                    <div class="house-main-content">
+                        <div class="house-image-section">
+                            <img src="${obj.photo || ''}" class="house-img-pro" onerror="this.src='/dom56.jpg'">
+                            <b style="font-size:22px; color:#008000; display:block; text-align:center; font-weight:900; padding: 10px 0;">🏠 ${obj.address}</b>
+                        </div>
+                        <div class="house-info-section">
+                            <div class="house-info-grid">
+                                <div class="info-row-compact"><span>🏗️ Год</span><span>${obj.year}</span></div>
+                                <div class="info-row-compact"><span>🏢 Этажей</span><span>${obj.floors} эт.</span></div>
+                                <div class="info-row-compact"><span>🧱 Материал</span><span>${obj.material || 'Монолит'}</span></div>
+                                <div class="info-row-compact"><span>📡 Лифты</span><span>${obj.elevator || 'Falcon'}</span></div>
+                                <div class="info-row-compact"><span>🏗️ Застройщик</span><span>${obj.developer || 'Застройщик'}</span></div>
+                                <div class="info-row-compact"><span>📐 Площадь</span><span>${obj.area || 'N/A'}</span></div>
+                                <div class="info-row-compact"><span>🏘️ Серия</span><span>${obj.series || 'Типовая'}</span></div>
+                                <div class="info-row-compact"><span>🔑 Кв.</span><span>${obj.apartments || 'N/A'}</span></div>
+                            </div>
+                        </div>
                     </div>
-                    <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
-                        <button class="ui-btn" style="background:#3498db; color:#fff;" onclick="window.openCamera()">🎥 КАМЕРА</button>
-                        <button class="ui-btn" style="background:#d9534f; color:#fff;" onclick="window.openComplaintAction('${obj.address}')">🚨 ЖАЛОБА</button>
+                    <div style="display:grid; grid-template-columns: 1fr 1fr; gap:15px; margin-top: 10px;">
+                        <button class="ui-btn" style="background: linear-gradient(135deg, #3498db 0%, #2980b9 100%); color:#fff;" onclick="window.openCamera()">🎥 КАМЕРА</button>
+                        <button class="ui-btn" style="background: linear-gradient(135deg, #d9534f 0%, #c9302c 100%); color:#fff;" onclick="window.openComplaintAction('${obj.address}')">🚨 ЖАЛОБА</button>
                     </div>
                 </div>`;
 
@@ -160,26 +166,35 @@ const color = item.load < 33 ? '#00cc00' : (item.load < 66 ? '#ffa600' : '#ff330
                             ? "Бак для крупногабаритного мусора"
                             : `Бак для общих отходов ${item.title.includes('2') ? '№2' : '№1'}`;
                         
+                        const binTypeKey = item.type === 'tko_bin' ? 'tko' : 'common';
+                        
                         const photoHtml = item.photo
                             ? `<img src="${item.photo}" style="width:100%; height:200px; object-fit:cover; border-radius:15px; margin-bottom:15px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">`
                             : '';
 
                         const bHtml = `
-                            <div style="width:300px; padding:20px; text-align:center;">
+                            <div class="bin-card-modern" style="width:380px; padding:25px; text-align:center;">
                                 ${photoHtml}
-                                <b style="font-size:24px; color:${color}; display:block; line-height:1.2; margin-bottom:15px;">
+                                <b style="font-size:26px; color:${color}; display:block; line-height:1.2; margin-bottom:15px; font-weight:900;">
                                     🗑️ ${longTitle}
                                 </b>
-                                <div class="info-row" style="border-left:none; border-bottom:4px solid ${color}; background:#f9f9f9; display:inline-block; padding:8px 15px; font-size:18px;">
-                                    📊 Заполнение: ${item.load}%
+                                <div class="bin-fill-indicator" style="background: linear-gradient(135deg, #f8faf8 0%, #e8f0e8 100%); border-radius:20px; padding:15px; margin-bottom:15px; border:2px solid ${color}; box-shadow: 0 4px 15px rgba(0,0,0,0.08);">
+                                    <div style="font-size:14px; color:#666; margin-bottom:8px; font-weight:600; text-transform:uppercase;">Заполненность</div>
+                                    <div style="font-size:32px; color:${color}; font-weight:900;">${item.load}%</div>
+                                    <div style="width:100%; height:8px; background:#e0e0e0; border-radius:4px; margin-top:10px; overflow:hidden;">
+                                        <div style="width:${item.load}%; height:100%; background: linear-gradient(90deg, ${color}, ${color}dd); border-radius:4px; transition: width 0.5s;"></div>
+                                    </div>
                                 </div>
-                                <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px; margin-top:15px; text-align:left;">
-                                    <div class="info-row" style="font-size:12px; padding:8px; border-left-width:5px;">📦 Объем: ${item.volume || '1.1 м³'}</div>
-                                    <div class="info-row" style="font-size:12px; padding:8px; border-left-width:5px;">🛠️ Мат: ${item.material || 'Сталь'}</div>
+                                <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px; margin-bottom:15px;">
+                                    <div class="info-row" style="font-size:13px; padding:10px; border-left-width:5px; border-left-color:${color};">📦 ${item.volume || '1.1 м³'}</div>
+                                    <div class="info-row" style="font-size:13px; padding:10px; border-left-width:5px; border-left-color:${color};">🛠️ ${item.material || 'Сталь'}</div>
                                 </div>
-                                <div class="info-row" style="border-left:none; border-top:2px solid #3498db; background:#f0f7ff; margin-top:15px; font-size:13px;">
-                                    🕒 Последняя выгрузка: ${item.lastEmpty || '08:00'}
+                                <div class="info-row" style="border-left:none; border-top:2px solid #3498db; background:#f0f7ff; margin-bottom:20px; font-size:14px; border-radius:12px;">
+                                    🕒 Вывоз: ${item.lastEmpty || '08:00'}
                                 </div>
+                                <button class="ui-btn bin-info-btn" onclick="window.openBinSystemInfo('${binTypeKey}')" style="background: linear-gradient(135deg, #008000 0%, #00aa44 100%); color:#fff; font-size:14px; padding:16px;">
+                                    ℹ️ Как работает система отслеживания?
+                                </button>
                             </div>`;
                             
                         layers.tB.push(new ymaps.Placemark(item.coords, {
@@ -188,10 +203,10 @@ const color = item.load < 33 ? '#00cc00' : (item.load < 66 ? '#ffa600' : '#ff330
                             preset: 'islands#trashIcon',
                             iconColor: color,
                             iconScale: 1.5,
-                            balloonMinWidth: 350,
-                            balloonMaxWidth: 420,
-                            balloonMinHeight: 500,
-                            balloonMaxHeight: 800,
+                            balloonMinWidth: 420,
+                            balloonMaxWidth: 450,
+                            balloonMinHeight: 550,
+                            balloonMaxHeight: 850,
                             balloonPanelMaxMapArea: 0
                         }));
                     } 
@@ -323,6 +338,107 @@ const color = item.load < 33 ? '#00cc00' : (item.load < 66 ? '#ffa600' : '#ff330
         `;
         sub.style.display = "block";
     };
+
+// ✅ ФУНКЦИЯ ОТКРЫТИЯ ИНФОРМАЦИИ О СИСТЕМЕ ОТСЛЕЖИВАНИЯ МУСОРА
+window.openBinSystemInfo = (binType) => {
+    const tkoInfo = `
+        <div class="bin-system-guide" style="font-family: 'Montserrat', sans-serif;">
+            <div style="text-align:center; margin-bottom:40px;">
+                <h2 style="color: #d9534f; font-size: 42px; margin: 0 0 15px 0; font-weight: 900;">🔴 КГМ - Крупногабаритный мусор</h2>
+                <p style="color: #666; font-size: 18px;">Для диванов, шкафов, техники и других крупных предметов</p>
+                <div style="width: 120px; height: 5px; background: linear-gradient(90deg, #d9534f, #c9302c); margin: 25px auto 0; border-radius: 3px;"></div>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: 1fr; gap: 25px; margin-bottom: 35px;">
+                <div style="background: linear-gradient(135deg, #fff5f5 0%, #ffe8e8 100%); border-radius: 25px; padding: 25px; border-left: 6px solid #d9534f; box-shadow: 0 5px 20px rgba(217,83,79,0.1);">
+                    <h3 style="color: #d9534f; font-size: 22px; margin: 0 0 12px 0; font-weight: 800;">📐 Что можно выбрасывать?</h3>
+                    <ul style="margin: 0; padding-left: 25px; font-size: 16px; line-height: 1.8; color: #333;">
+                        <li>Старая мебель (диваны, кресла, шкафы)</li>
+                        <li>Бытовая техника (холодильники, стиральные машины)</li>
+                        <li>Двери, окна, сантехника</li>
+                        <li>Строительные отходы (до 50 кг)</li>
+                    </ul>
+                </div>
+                
+                <div style="background: linear-gradient(135deg, #fff8e6 0%, #fff0cc 100%); border-radius: 25px; padding: 25px; border-left: 6px solid #f39c12; box-shadow: 0 5px 20px rgba(243,156,18,0.1);">
+                    <h3 style="color: #f39c12; font-size: 22px; margin: 0 0 12px 0; font-weight: 800;">⚠️ Важные правила</h3>
+                    <ul style="margin: 0; padding-left: 25px; font-size: 16px; line-height: 1.8; color: #333;">
+                        <li>Не заталкивайте КГМ в обычные баки!</li>
+                        <li>Разбирайте крупную мебель при возможности</li>
+                        <li>Стекло упаковывайте в плотную тару</li>
+                        <li>Опасные отходы (лампы, батареи) — в спецбоксы</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div style="background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%); border-radius: 25px; padding: 25px; text-align: center; border: 3px dashed #008000;">
+                <h3 style="color: #008000; font-size: 24px; margin: 0 0 15px 0; font-weight: 900;">📊 Как работает мониторинг?</h3>
+                <p style="font-size: 16px; color: #333; line-height: 1.7; margin: 0;">
+                    Датчик объёма измеряет заполненность контейнера каждые 15 минут. 
+                    При достижении 80% система автоматически создаёт заявку на вывоз. 
+                    Мусоровоз прибывает в течение 2-4 часов.
+                </p>
+            </div>
+        </div>
+    `;
+    
+    const commonInfo = `
+        <div class="bin-system-guide" style="font-family: 'Montserrat', sans-serif;">
+            <div style="text-align:center; margin-bottom:40px;">
+                <h2 style="color: #008000; font-size: 42px; margin: 0 0 15px 0; font-weight: 900;">🟢 Общие отходы</h2>
+                <p style="color: #666; font-size: 18px;">Для обычного бытового мусора и упаковки</p>
+                <div style="width: 120px; height: 5px; background: linear-gradient(90deg, #008000, #00aa44); margin: 25px auto 0; border-radius: 3px;"></div>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: 1fr; gap: 25px; margin-bottom: 35px;">
+                <div style="background: linear-gradient(135deg, #f0fdf0 0%, #e0f7e0 100%); border-radius: 25px; padding: 25px; border-left: 6px solid #008000; box-shadow: 0 5px 20px rgba(0,128,0,0.1);">
+                    <h3 style="color: #008000; font-size: 22px; margin: 0 0 12px 0; font-weight: 800;">📦 Что можно выбрасывать?</h3>
+                    <ul style="margin: 0; padding-left: 25px; font-size: 16px; line-height: 1.8; color: #333;">
+                        <li>Пищевые отходы (в пакетах)</li>
+                        <li>Бумага, картон, газеты</li>
+                        <li>Пластиковая упаковка, бутылки</li>
+                        <li>Текстиль, обувь</li>
+                    </ul>
+                </div>
+                
+                <div style="background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%); border-radius: 25px; padding: 25px; border-left: 6px solid #d9534f; box-shadow: 0 5px 20px rgba(217,83,79,0.1);">
+                    <h3 style="color: #d9534f; font-size: 22px; margin: 0 0 12px 0; font-weight: 800;">🚫 Категорически нельзя!</h3>
+                    <ul style="margin: 0; padding-left: 25px; font-size: 16px; line-height: 1.8; color: #333;">
+                        <li>Ртутные лампы и термометры</li>
+                        <li>Автомобильные шины</li>
+                        <li>Строительный мусор (более 50 кг)</li>
+                        <li>Жидкие отходы и химикаты</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div style="background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%); border-radius: 25px; padding: 25px; text-align: center; border: 3px dashed #2196f3;">
+                <h3 style="color: #1976d2; font-size: 24px; margin: 0 0 15px 0; font-weight: 900;">🎯 Система Falcon Smart</h3>
+                <p style="font-size: 16px; color: #333; line-height: 1.7; margin: 0;">
+                    Лазерный датчик под крышкой бака измеряет уровень мусора каждые 15 минут. 
+                    Данные передаются в диспетчерскую. При заполнении >80% система сама 
+                    добавляет точку в маршрут ближайшего мусоровоза. Точность измерения — 98%.
+                </p>
+            </div>
+            
+            <div style="margin-top: 25px; background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%); border-radius: 25px; padding: 20px; border-left: 6px solid #ff9800;">
+                <h4 style="color: #f57c00; font-size: 18px; margin: 0 0 10px 0; font-weight: 800;">💡 Совет:</h4>
+                <p style="font-size: 15px; color: #555; line-height: 1.6; margin: 0;">
+                    Сминайте пластиковые бутылки и картон перед выбросом! В бак 1.1 м³ 
+                    помещается 40 кг целых или 200 кг смятых отходов. Это экономит место 
+                    и снижает частоту вывоза мусора.
+                </p>
+            </div>
+        </div>
+    `;
+    
+    const content = binType === 'tko' ? tkoInfo : commonInfo;
+    
+    window.openSub(
+        binType === 'tko' ? '🔴 Система отслеживания КГМ' : '🟢 Система отслеживания отходов',
+        content
+    );
+};
 
 window.openEcoGuide = () => {
     const cards = [
