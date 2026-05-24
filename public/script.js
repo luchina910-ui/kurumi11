@@ -112,18 +112,19 @@ async function initIndustrialGis() {
                 <div class="house-card-pro">
                     <img src="${obj.photo || ''}" class="house-img-pro" onerror="this.src='/dom56.jpg'">
                     <b style="font-size:20px; color:#008000; display:block; margin-bottom:15px; text-align:center; font-weight:900;">🏠 ${obj.address}</b>
-                    <div style="display:flex; flex-direction:column; gap:8px;">
-                        <div class="info-row"><span>🏗️ Год постройки:</span><span>${obj.year}</span></div>
-                        <div class="info-row"><span>🏢 Этажей:</span><span>${obj.floors} эт.</span></div>
-                        <div class="info-row"><span>🧱 Материал:</span><span>${obj.material || 'Монолит'}</span></div>
-                        <div class="info-row"><span>📡 Лифты:</span><span>${obj.elevator || 'Falcon'}</span></div>
-                        <div class="info-row"><span>🏗️ Застройщик:</span><span>${obj.developer || 'Застройщик'}</span></div>
-                        <div class="info-row"><span>📐 Площадь / Кв.:</span><span>${obj.area || 'N/A'} / ${obj.apartments || 'N/A'}</span></div>
-                        <div class="info-row"><span>🏘️ Серия:</span><span>${obj.series || 'Типовая'}</span></div>
+                    <div class="house-info-grid">
+                        <div class="info-row-compact"><span>🏗️ Год</span><span>${obj.year}</span></div>
+                        <div class="info-row-compact"><span>🏢 Этажей</span><span>${obj.floors} эт.</span></div>
+                        <div class="info-row-compact"><span>🧱 Материал</span><span>${obj.material || 'Монолит'}</span></div>
+                        <div class="info-row-compact"><span>📡 Лифты</span><span>${obj.elevator || 'Falcon'}</span></div>
+                        <div class="info-row-compact"><span>🏗️ Застройщик</span><span>${obj.developer || 'Застройщик'}</span></div>
+                        <div class="info-row-compact"><span>📐 Площадь</span><span>${obj.area || 'N/A'}</span></div>
+                        <div class="info-row-compact"><span>🏘️ Серия</span><span>${obj.series || 'Типовая'}</span></div>
+                        <div class="info-row-compact"><span>🔑 Кв.</span><span>${obj.apartments || 'N/A'}</span></div>
                     </div>
-                    <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px; margin-top:15px;">
-                        <button class="ui-btn" style="background:#3498db; color:#fff;" onclick="window.openCamera()">КАМЕРА</button>
-                        <button class="ui-btn" style="background:#d9534f; color:#fff;" onclick="window.openComplaintAction('${obj.address}')">ЖАЛОБА</button>
+                    <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
+                        <button class="ui-btn" style="background:#3498db; color:#fff;" onclick="window.openCamera()">🎥 КАМЕРА</button>
+                        <button class="ui-btn" style="background:#d9534f; color:#fff;" onclick="window.openComplaintAction('${obj.address}')">🚨 ЖАЛОБА</button>
                     </div>
                 </div>`;
 
@@ -133,7 +134,9 @@ async function initIndustrialGis() {
                 preset: 'islands#greenHomeCircleIcon',
                 iconScale: 1.8,
                 balloonMinWidth: 430,
-                balloonMinHeight: 720,
+                balloonMaxWidth: 450,
+                balloonMinHeight: 550,
+                balloonMaxHeight: 650,
                 balloonPanelMaxMapArea: 0
             });
             layers.hM.push(m);
