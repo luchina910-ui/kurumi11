@@ -4,10 +4,11 @@
 __pycache__/
 *.o
 *.obj
+*.class
 *.exe
 *.dll
 *.so
-*.class
+*.a
 *.out
 
 # Dependencies
@@ -22,16 +23,23 @@ venv/
 dist/
 build/
 target/
+.gradle/
+
+# Python specific
+*.pyc
+__pycache__/
+.pytest_cache/
+.mypy_cache/
+*.pyo
+*.pyd
+
+# Logs and temp files
 *.log
 *.tmp
 *.swp
 *.swo
 
-# Editors
-.vscode/
-.idea/
-
-# System files
+# OS generated files
 .DS_Store
 Thumbs.db
 
@@ -40,10 +48,9 @@ coverage/
 htmlcov/
 .coverage
 
-# Cache directories
-.mypy_cache/
-.pytest_cache/
-.gradle/
+# Editors
+.vscode/
+.idea/
 
 # Compressed files
 *.zip
