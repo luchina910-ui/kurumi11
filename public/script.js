@@ -440,7 +440,7 @@ window.openEcoGuide = () => {
     function id(i) { return document.getElementById(i); }
     
 const gui = document.createElement('div');
-gui.id = "eco-panel-top-root";
+gui.id = "eco-panel-root";
 gui.className = "premium-card";
 gui.innerHTML = `
     <div class="eco-header">🌿 ЭКОСИСТЕМА ДВОРА</div>
