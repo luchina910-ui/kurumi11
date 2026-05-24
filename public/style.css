@@ -148,6 +148,41 @@ body, html {
   border: 1px solid rgba(255,255,255,0.5);
 }
 
+.house-card-pro .house-info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 15px;
+}
+
+.house-card-pro .info-row-compact {
+  background: linear-gradient(135deg, #f9fbf9 0%, #f0f7f0 100%); 
+  padding: 10px 14px; 
+  border-radius: 14px; 
+  border-left: 5px solid var(--primary); 
+  font-size: 12px; 
+  font-weight: 800; 
+  color: #222;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.house-card-pro .info-row-compact span:first-child { 
+  color: #666; 
+  font-weight: 600; 
+  font-size: 11px;
+}
+
+.house-card-pro .info-row-compact span:last-child { 
+  color: #000; 
+  font-weight: 800; 
+  text-align: right;
+  font-size: 13px;
+}
+
 @keyframes slideUpPro {
     from { transform: translateY(40px) scale(0.95); opacity: 0; }
     to { transform: translateY(0) scale(1); opacity: 1; }
@@ -228,8 +263,8 @@ body, html {
 }
 
 /* 🌿 ЭКОСИСТЕМА (ОБНОВЛЁННАЯ ЛОГИКА) */
-#eco-panel-root {
-  position: absolute !important; top: 80px; right: 20px; width: 340px; z-index: 10000; min-height: 65px;
+#eco-panel-root, #eco-panel-top-root {
+  position: absolute !important; top: 20px; right: 20px; width: 340px; z-index: 10000; min-height: 65px;
   background: rgba(255,255,255,0.95) !important; backdrop-filter: blur(20px);
   border-radius: 32px; 
   box-shadow: 0 15px 50px rgba(0,0,0,0.15), inset 0 1px 0 rgba(255,255,255,0.8);
@@ -269,13 +304,14 @@ body, html {
 
 /* 🖥️ ПК: Открывается при наведении мыши */
 @media (min-width: 769px) {
-  #eco-panel-root:hover .eco-content { opacity: 1; max-height: 450px; }
+  #eco-panel-root:hover .eco-content, 
+  #eco-panel-top-root:hover .eco-content { opacity: 1; max-height: 450px; }
 }
 
 /* 📱 МОБИЛКА: Открывается ТОЛЬКО по клику (через класс .open) */
 @media (max-width: 768px) {
-  #eco-panel-root { top: 15px !important; right: 15px !important; width: calc(100% - 30px) !important; }
-  #eco-panel-root.open .eco-content { opacity: 1; max-height: 500px; }
+  #eco-panel-root, #eco-panel-top-root { top: 15px !important; right: 15px !important; width: calc(100% - 30px) !important; }
+  #eco-panel-root.open .eco-content, #eco-panel-top-root.open .eco-content { opacity: 1; max-height: 500px; }
 }
 
 /* 🌿 Анимация строк (каскадный выезд) */
@@ -291,15 +327,23 @@ body, html {
 }
 
 #eco-panel-root:hover .eco-content label,
-#eco-panel-root.open .eco-content label { opacity: 1; transform: translateX(0); }
+#eco-panel-root.open .eco-content label,
+#eco-panel-top-root:hover .eco-content label,
+#eco-panel-top-root.open .eco-content label { opacity: 1; transform: translateX(0); }
 
 /* Каскадная задержка */
-#eco-panel-root:hover .eco-content label:nth-child(1), #eco-panel-root.open .eco-content label:nth-child(1) { transition-delay: 0.05s; }
-#eco-panel-root:hover .eco-content label:nth-child(2), #eco-panel-root.open .eco-content label:nth-child(2) { transition-delay: 0.1s; }
-#eco-panel-root:hover .eco-content label:nth-child(3), #eco-panel-root.open .eco-content label:nth-child(3) { transition-delay: 0.15s; }
-#eco-panel-root:hover .eco-content label:nth-child(4), #eco-panel-root.open .eco-content label:nth-child(4) { transition-delay: 0.2s; }
-#eco-panel-root:hover .eco-content label:nth-child(5), #eco-panel-root.open .eco-content label:nth-child(5) { transition-delay: 0.25s; }
-#eco-panel-root:hover .eco-content label:nth-child(6), #eco-panel-root.open .eco-content label:nth-child(6) { transition-delay: 0.3s; }
+#eco-panel-root:hover .eco-content label:nth-child(1), #eco-panel-root.open .eco-content label:nth-child(1),
+#eco-panel-top-root:hover .eco-content label:nth-child(1), #eco-panel-top-root.open .eco-content label:nth-child(1) { transition-delay: 0.05s; }
+#eco-panel-root:hover .eco-content label:nth-child(2), #eco-panel-root.open .eco-content label:nth-child(2),
+#eco-panel-top-root:hover .eco-content label:nth-child(2), #eco-panel-top-root.open .eco-content label:nth-child(2) { transition-delay: 0.1s; }
+#eco-panel-root:hover .eco-content label:nth-child(3), #eco-panel-root.open .eco-content label:nth-child(3),
+#eco-panel-top-root:hover .eco-content label:nth-child(3), #eco-panel-top-root.open .eco-content label:nth-child(3) { transition-delay: 0.15s; }
+#eco-panel-root:hover .eco-content label:nth-child(4), #eco-panel-root.open .eco-content label:nth-child(4),
+#eco-panel-top-root:hover .eco-content label:nth-child(4), #eco-panel-top-root.open .eco-content label:nth-child(4) { transition-delay: 0.2s; }
+#eco-panel-root:hover .eco-content label:nth-child(5), #eco-panel-root.open .eco-content label:nth-child(5),
+#eco-panel-top-root:hover .eco-content label:nth-child(5), #eco-panel-top-root.open .eco-content label:nth-child(5) { transition-delay: 0.25s; }
+#eco-panel-root:hover .eco-content label:nth-child(6), #eco-panel-root.open .eco-content label:nth-child(6),
+#eco-panel-top-root:hover .eco-content label:nth-child(6), #eco-panel-top-root.open .eco-content label:nth-child(6) { transition-delay: 0.3s; }
 
 .eco-content label:hover { 
     background: linear-gradient(135deg, #e6f5e6 0%, #d4f0d4 100%); 
@@ -335,7 +379,11 @@ body, html {
 
 /* При наведении на строку ползунок слегка подсвечивается */
 .eco-content label:hover .slider { 
-    background: linear-gradient(135deg, #c8d6c8 0%, #b8c8b8 100%); 
+    background: linear-gradient(135deg, #a8d8a8 0%, #98c898 100%); 
+}
+
+.slider:hover {
+    background: linear-gradient(135deg, #b8e0b8 0%, #a8d0a8 100%) !important;
 }
 
 /* ВКЛЮЧЕННОЕ СОСТОЯНИЕ */
@@ -657,11 +705,11 @@ body.interface-dark input:checked + .slider::before { background-color: #0a140a 
     #settings-panel-root { left: 12px; width: calc(100% - 24px); bottom: 95px; padding: 25px; }
 
     /* 📱 ЭКО-ПАНЕЛЬ (Скрыта по умолчанию, открывается кликом) */
-    #eco-panel-root { top: 70px !important; right: 15px !important; width: calc(100% - 30px) !important; }
-    #eco-panel-root:hover .eco-content { opacity: 0; max-height: 0; } /* Отключаем ховер */
-    #eco-panel-root.open .eco-content { opacity: 1; max-height: 500px; } /* Открыто по клику */
+    #eco-panel-root, #eco-panel-top-root { top: 70px !important; right: 15px !important; width: calc(100% - 30px) !important; }
+    #eco-panel-root:hover .eco-content, #eco-panel-top-root:hover .eco-content { opacity: 0; max-height: 0; } /* Отключаем ховер */
+    #eco-panel-root.open .eco-content, #eco-panel-top-root.open .eco-content { opacity: 1; max-height: 500px; } /* Открыто по клику */
     
-    .eco-content label { opacity: 1 !important; transform: none !important; transition-delay: 0s !important; padding: 14px 16px !important; }
+    #eco-panel-root.open .eco-content label, #eco-panel-top-root.open .eco-content label { opacity: 1 !important; transform: none !important; transition-delay: 0s !important; }
     .switch { width: 58px !important; height: 30px !important; }
 }
 
