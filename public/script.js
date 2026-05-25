@@ -139,10 +139,10 @@ async function initIndustrialGis() {
             }, {
                 preset: 'islands#greenHomeCircleIcon',
                 iconScale: 1.8,
-                balloonMinWidth: 750,
-                balloonMaxWidth: 950,
-                balloonMinHeight: 400,
-                balloonMaxHeight: 600,
+                balloonMinWidth: 650,
+                balloonMaxWidth: 750,
+                balloonMinHeight: 350,
+                balloonMaxHeight: 500,
                 balloonPanelMaxMapArea: 0
             });
             layers.hM.push(m);
