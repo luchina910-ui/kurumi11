@@ -339,9 +339,9 @@ const color = item.load < 33 ? '#00cc00' : (item.load < 66 ? '#ffa600' : '#ff330
         sub.style.display = "block";
     };
 
-// ✅ ФУНКЦИЯ ОТКРЫТИЯ ИНФОРМАЦИИ О СИСТЕМЕ ОТСЛЕЖИВАНИЯ МУСОРА
-window.openBinSystemInfo = (binType) => {
-    const tkoInfo = `
+    // ✅ ФУНКЦИЯ ОТКРЫТИЯ ИНФОРМАЦИИ О СИСТЕМЕ ОТСЛЕЖИВАНИЯ МУСОРА
+    window.openBinSystemInfo = (binType) => {
+        const tkoInfo = `
         <div class="bin-system-guide" style="font-family: 'Montserrat', sans-serif;">
             <div style="text-align:center; margin-bottom:40px;">
                 <h2 style="color: #d9534f; font-size: 42px; margin: 0 0 15px 0; font-weight: 900;">🔴 КГМ - Крупногабаритный мусор</h2>
@@ -475,9 +475,9 @@ window.openBinSystemInfo = (binType) => {
         binType === 'tko' ? '🔴 Система отслеживания КГМ' : '🟢 Система отслеживания отходов',
         content
     );
-};
+    };
 
-window.openEcoGuide = () => {
+    window.openEcoGuide = () => {
     const cards = [
         { icon: "💳", title: "Экономия на ЖКУ", color: "#008000", desc: "Сминайте ПЭТ-бутылки и картон перед выбросом! В контейнер 1.1 м³ помещается 40 кг целых или 200 кг смятых отходов. Меньше воздуха = реже выезд техники = стабильный тариф." },
         { icon: "🚫", title: "Категорический стоп-лист", color: "#d9534f", desc: "Не бросайте в баки: шины, бетон, стёкла, ртутные лампы. Они ломают пресс мусоровоза (ремонт от 200 тыс. ₽) и блокируют сортировку на заводе." },
@@ -558,7 +558,7 @@ window.openEcoGuide = () => {
     `;
 
     window.openModal('', html);
-};
+    };
 
     window.runAction = (act) => {
         if(act === 'sat') map.setType('yandex#hybrid');
@@ -693,13 +693,13 @@ window.showQR = () => {
                  onclick="this.style.transform = this.style.transform === 'scale(1.6)' ? 'scale(1)' : 'scale(1.6)';">
             <p style="font-size:13px; color:#888; margin-top:15px;">Нажми на фото, чтобы увеличить</p>
         </div>`);
-};
+    };
 
-refreshL();
-}
-// ✅ ЛОГОТИП КЛИКАБЕЛЬНЫЙ - ИНФОРМАЦИЯ ОБ УК
-const logoTrigger = document.getElementById('logo-trigger');
-if (logoTrigger) {
+    refreshL();
+    
+    // ✅ ЛОГОТИП КЛИКАБЕЛЬНЫЙ - ИНФОРМАЦИЯ ОБ УК
+    const logoTrigger = document.getElementById('logo-trigger');
+    if (logoTrigger) {
     logoTrigger.addEventListener('click', () => {
         window.openModal('ℹ️ ООО «УК ВСЕ СВОИ»', `
             <div class="uk-info-container">
@@ -766,4 +766,5 @@ if (logoTrigger) {
             </div>
         `);
     });
-}
+    }
+
