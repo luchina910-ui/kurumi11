@@ -139,10 +139,10 @@ async function initIndustrialGis() {
             }, {
                 preset: 'islands#greenHomeCircleIcon',
                 iconScale: 1.8,
-                balloonMinWidth: 850,
-                balloonMaxWidth: 900,
-                balloonMinHeight: 450,
-                balloonMaxHeight: 550,
+                balloonMinWidth: 750,
+                balloonMaxWidth: 950,
+                balloonMinHeight: 400,
+                balloonMaxHeight: 600,
                 balloonPanelMaxMapArea: 0
             });
             layers.hM.push(m);
@@ -379,6 +379,24 @@ window.openBinSystemInfo = (binType) => {
                     Мусоровоз прибывает в течение 2-4 часов.
                 </p>
             </div>
+            
+            <div style="margin-top: 25px; background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%); border-radius: 25px; padding: 25px; border-left: 6px solid #ff9800;">
+                <h4 style="color: #f57c00; font-size: 18px; margin: 0 0 15px 0; font-weight: 800;">👷 Кто устанавливает?</h4>
+                <p style="font-size: 15px; color: #555; line-height: 1.7; margin: 0;">
+                    Установку датчиков выполняет сертифицированная компания-партнёр ООО «УК ВСЕ СВОИ». 
+                    Монтаж проводится квалифицированными специалистами с допуском к работе с электрооборудованием. 
+                    Все работы занимают 15-20 минут на один бак и не требуют остановки эксплуатации.
+                </p>
+            </div>
+            
+            <div style="margin-top: 20px; background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%); border-radius: 25px; padding: 25px; border-left: 6px solid #2196f3;">
+                <h4 style="color: #1976d2; font-size: 18px; margin: 0 0 15px 0; font-weight: 800;">🛡️ Гарантия и обслуживание</h4>
+                <p style="font-size: 15px; color: #555; line-height: 1.7; margin: 0;">
+                    На все датчики предоставляется гарантия 3 года. В гарантийный период входит бесплатная замена 
+                    оборудования при выходе из строя. Послегарантийное обслуживание осуществляется по договору. 
+                    Техническая поддержка работает 24/7. Плановая поверка датчиков — раз в 12 месяцев.
+                </p>
+            </div>
         </div>
     `;
     
@@ -421,12 +439,31 @@ window.openBinSystemInfo = (binType) => {
                 </p>
             </div>
             
-            <div style="margin-top: 25px; background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%); border-radius: 25px; padding: 20px; border-left: 6px solid #ff9800;">
-                <h4 style="color: #f57c00; font-size: 18px; margin: 0 0 10px 0; font-weight: 800;">💡 Совет:</h4>
-                <p style="font-size: 15px; color: #555; line-height: 1.6; margin: 0;">
+            <div style="margin-top: 25px; background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%); border-radius: 25px; padding: 25px; border-left: 6px solid #ff9800;">
+                <h4 style="color: #f57c00; font-size: 18px; margin: 0 0 15px 0; font-weight: 800;">👷 Кто устанавливает?</h4>
+                <p style="font-size: 15px; color: #555; line-height: 1.7; margin: 0;">
+                    Установку лазерных датчиков Falcon Smart выполняют сертифицированные инженеры компании-производителя. 
+                    Специалисты проходят специальное обучение и имеют все необходимые допуски. 
+                    Монтаж занимает 20-30 минут, оборудование сразу проходит калибровку и тестирование.
+                </p>
+            </div>
+            
+            <div style="margin-top: 20px; background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%); border-radius: 25px; padding: 25px; border-left: 6px solid #008000;">
+                <h4 style="color: #008000; font-size: 18px; margin: 0 0 15px 0; font-weight: 800;">🛡️ Гарантия и сервис</h4>
+                <p style="font-size: 15px; color: #555; line-height: 1.7; margin: 0;">
+                    Гарантия на датчики Falcon Smart составляет 5 лет. В этот период включены: бесплатная замена 
+                    при неисправности, регулярная диагностика (раз в квартал), обновление ПО. 
+                    Круглосуточная техподдержка реагирует на сбои в течение 1 часа. 
+                    Срок службы оборудования — до 10 лет при правильной эксплуатации.
+                </p>
+            </div>
+            
+            <div style="margin-top: 20px; background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%); border-radius: 25px; padding: 25px; border-left: 6px solid #9c27b0;">
+                <h4 style="color: #7b1fa2; font-size: 18px; margin: 0 0 15px 0; font-weight: 800;">💡 Совет по эксплуатации</h4>
+                <p style="font-size: 15px; color: #555; line-height: 1.7; margin: 0;">
                     Сминайте пластиковые бутылки и картон перед выбросом! В бак 1.1 м³ 
                     помещается 40 кг целых или 200 кг смятых отходов. Это экономит место 
-                    и снижает частоту вывоза мусора.
+                    и снижает частоту вывоза мусора, что выгодно всем жильцам.
                 </p>
             </div>
         </div>
