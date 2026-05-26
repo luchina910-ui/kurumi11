@@ -502,9 +502,57 @@ const color = item.load < 33 ? '#00cc00' : (item.load < 66 ? '#ffa600' : '#ff330
                     <button class="ui-btn" style="background:linear-gradient(135deg, #f39c12, #e67e22); color:#fff; font-size:13px; padding:15px; max-height:85vh; overflow-y:auto; height:auto;" onclick="window.openSub('💳 Оплата счетов', 'Функция онлайн-оплаты счетов находится в разработке.<br><br>Ожидайте обновления!')">
                         💳 ОПЛАТА СЧЕТОВ
                     </button>
-                    <button class="ui-btn" style="background:linear-gradient(135deg, #9b59b6, #8e44ad); color:#fff; font-size:13px; padding:15px; max-height:85vh; overflow-y:auto; height:auto;" onclick="window.openSub('🔔 Уведомления', 'Здесь будут отображаться уведомления от управляющей компании.<br><br>Новых уведомлений нет.')">
+                    <button class="ui-btn" style="background:linear-gradient(135deg, #9b59b6, #8e44ad); color:#fff; font-size:13px; padding:15px; max-height:85vh; overflow-y:auto; height:auto;" onclick="window.openNotificationsPage()">
                         🔔 УВЕДОМЛЕНИЯ
                     </button>
+                </div>
+                
+                <!-- Полезные советы для жильцов -->
+                <div style="background:linear-gradient(135deg, #fff9e6, #ffffff); border-radius:15px; padding:20px; margin-top:20px; border-left:5px solid #f39c12; box-shadow:0 4px 15px rgba(0,0,0,0.1);">
+                    <h2 style="color:#f39c12; font-size:18px; margin:0 0 15px 0;">💡 ПОЛЕЗНЫЕ СОВЕТЫ ЖИЛЬЦАМ</h2>
+                    <div style="font-size:13px; line-height:1.8; color:#333;">
+                        <div style="margin-bottom:12px; padding:10px; background:#fff; border-radius:8px;">
+                            <strong>🌡️ Экономия тепла:</strong> Не закрывайте батареи мебелью и шторами — это снижает теплоотдачу на 20-30%. Используйте терморегуляторы для комфортной температуры.
+                        </div>
+                        <div style="margin-bottom:12px; padding:10px; background:#fff; border-radius:8px;">
+                            <strong>💧 Экономия воды:</strong> Закрывайте кран во время чистки зубов — экономия до 15 литров в минуту. Установите аэраторы на смесители.
+                        </div>
+                        <div style="margin-bottom:12px; padding:10px; background:#fff; border-radius:8px;">
+                            <strong>⚡ Экономия электроэнергии:</strong> Используйте LED-лампы (экономия до 80%). Выключайте приборы из розетки, когда не используете их.
+                        </div>
+                        <div style="margin-bottom:12px; padding:10px; background:#fff; border-radius:8px;">
+                            <strong>🗑️ Раздельный сбор отходов:</strong> Пластик, стекло и бумагу можно сдавать в пункты приёма. КГМ помогает отслеживать заполненность контейнеров.
+                        </div>
+                        <div style="margin-bottom:12px; padding:10px; background:#fff; border-radius:8px;">
+                            <strong>🏠 Безопасность:</strong> Не оставляйте входную дверь открытой. При подозрительных ситуациях звоните в аварийную службу.
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- О дипломном проекте (КГМ) -->
+                <div style="background:linear-gradient(135deg, #e8f4fd, #ffffff); border-radius:15px; padding:20px; margin-top:20px; border-left:5px solid #3498db; box-shadow:0 4px 15px rgba(0,0,0,0.1);">
+                    <h2 style="color:#3498db; font-size:18px; margin:0 0 15px 0;">🎓 О ПРОЕКТЕ КГМ</h2>
+                    <div style="font-size:13px; line-height:1.7; color:#333;">
+                        <p style="margin-bottom:10px;">
+                            <strong>КГМ (Коммунальная Геоинформационная Модель)</strong> — это современная система мониторинга и управления городской инфраструктурой, разработанная в рамках дипломного проекта.
+                        </p>
+                        <p style="margin-bottom:10px;">
+                            <strong>Основные возможности КГМ:</strong>
+                        </p>
+                        <ul style="margin-bottom:10px; padding-left:20px;">
+                            <li>🗺️ Визуализация объектов инфраструктуры на карте</li>
+                            <li>📊 Мониторинг заполненности мусорных контейнеров в реальном времени</li>
+                            <li>🅿️ Контроль занятости парковочных мест с помощью ИИ</li>
+                            <li>🎯 Отслеживание маршрутов спецтехники</li>
+                            <li>📱 Удобный личный кабинет для жильцов</li>
+                        </ul>
+                        <p style="margin-bottom:10px;">
+                            <strong>Цель проекта:</strong> Повышение качества жизни жильцов за счёт прозрачности работы УК и оперативного реагирования на проблемы.
+                        </p>
+                        <p style="color:#666; font-style:italic;">
+                            👨‍🎓 Работа выполнена Лучиным Иваном Витальевичем, группа 301э
+                        </p>
+                    </div>
                 </div>
                 
                 <!-- Дополнительные функции -->
@@ -654,6 +702,112 @@ const color = item.load < 33 ? '#00cc00' : (item.load < 66 ? '#ffa600' : '#ff330
         `;
         sub.style.display = "block";
     };
+    
+    // Страница уведомлений для жильцов
+    window.openNotificationsPage = () => {
+        const content = document.getElementById('m-content');
+        content.innerHTML = `
+            <div class="notifications-page" style="padding:15px; max-height:85vh; overflow-y:auto;">
+                <h1 style="color:#9b59b6; font-weight:900; font-size:40px; margin-bottom:20px; text-align:center;">🔔 УВЕДОМЛЕНИЯ</h1>
+                <p style="font-size:14px; color:#666; margin-bottom:25px; text-align:center;">Актуальные сообщения от УК «ВСЕ СВОИ»</p>
+                
+                <!-- Список уведомлений -->
+                <div style="max-width:700px; margin:0 auto;">
+                    
+                    <!-- Уведомление 1 - Важное -->
+                    <div style="background:linear-gradient(135deg, #fff5f5, #ffffff); border-radius:15px; padding:20px; margin-bottom:15px; border-left:5px solid #e74c3c; box-shadow:0 3px 10px rgba(0,0,0,0.08);">
+                        <div style="display:flex; justify-content:space-between; align-items:start; margin-bottom:10px;">
+                            <h3 style="color:#e74c3c; font-size:16px; margin:0; font-weight:800;">⚠️ ПЛАНИРУЕМЫЕ ОТКЛЮЧЕНИЯ ВОДЫ</h3>
+                            <span style="background:#e74c3c; color:#fff; padding:4px 10px; border-radius:12px; font-size:11px; font-weight:700;">ВАЖНО</span>
+                        </div>
+                        <p style="font-size:13px; line-height:1.7; color:#333; margin-bottom:10px;">
+                            <strong>Дата:</strong> 25-27 декабря 2025 г.<br>
+                            <strong>Время:</strong> с 09:00 до 17:00<br>
+                            <strong>Причина:</strong> Плановая замена участка водопровода на ул. Советская
+                        </p>
+                        <p style="font-size:13px; color:#666; margin:0;">
+                            <strong>Адреса:</strong> ул. Советская д.1-15, ул. Мира д.10-25. Просим сделать запас воды заранее!
+                        </p>
+                        <div style="margin-top:12px; font-size:11px; color:#999;">Опубликовано: 20 декабря 2025 в 10:30</div>
+                    </div>
+                    
+                    <!-- Уведомление 2 - Информация -->
+                    <div style="background:linear-gradient(135deg, #f0f7ff, #ffffff); border-radius:15px; padding:20px; margin-bottom:15px; border-left:5px solid #3498db; box-shadow:0 3px 10px rgba(0,0,0,0.08);">
+                        <div style="display:flex; justify-content:space-between; align-items:start; margin-bottom:10px;">
+                            <h3 style="color:#3498db; font-size:16px; margin:0; font-weight:800;">📊 ПРИЁМ ПОКАЗАНИЙ СЧЁТЧИКОВ</h3>
+                            <span style="background:#3498db; color:#fff; padding:4px 10px; border-radius:12px; font-size:11px; font-weight:700;">ИНФО</span>
+                        </div>
+                        <p style="font-size:13px; line-height:1.7; color:#333; margin-bottom:10px;">
+                            Напоминаем, что приём показаний приборов учёта за декабрь 2025 года осуществляется <strong>с 20 по 25 число</strong>.
+                        </p>
+                        <p style="font-size:13px; color:#666; margin:0;">
+                            Передать показания можно через личный кабинет (кнопка "Подать показания счётчиков") или позвонив диспетчеру по телефону +7 (921) 482-85-50.
+                        </p>
+                        <div style="margin-top:12px; font-size:11px; color:#999;">Опубликовано: 18 декабря 2025 в 14:15</div>
+                    </div>
+                    
+                    <!-- Уведомление 3 -_success -->
+                    <div style="background:linear-gradient(135deg, #f0fff4, #ffffff); border-radius:15px; padding:20px; margin-bottom:15px; border-left:5px solid #008000; box-shadow:0 3px 10px rgba(0,0,0,0.08);">
+                        <div style="display:flex; justify-content:space-between; align-items:start; margin-bottom:10px;">
+                            <h3 style="color:#008000; font-size:16px; margin:0; font-weight:800;">✅ ОБНОВЛЕНИЕ СИСТЕМЫ КГМ</h3>
+                            <span style="background:#008000; color:#fff; padding:4px 10px; border-radius:12px; font-size:11px; font-weight:700;">НОВОСТЬ</span>
+                        </div>
+                        <p style="font-size:13px; line-height:1.7; color:#333; margin-bottom:10px;">
+                            В системе КГМ успешно внедрено обновление! Теперь доступна функция <strong>ИИ-мониторинга парковочных мест</strong> в реальном времени.
+                        </p>
+                        <p style="font-size:13px; color:#666; margin:0;">
+                            Вы можете видеть актуальную информацию о свободных местах на парковках вашего двора прямо на карте. Система обновляется каждые 5 минут.
+                        </p>
+                        <div style="margin-top:12px; font-size:11px; color:#999;">Опубликовано: 15 декабря 2025 в 09:00</div>
+                    </div>
+                    
+                    <!-- Уведомление 4 - Предупреждение -->
+                    <div style="background:linear-gradient(135deg, #fff9e6, #ffffff); border-radius:15px; padding:20px; margin-bottom:15px; border-left:5px solid #f39c12; box-shadow:0 3px 10px rgba(0,0,0,0.08);">
+                        <div style="display:flex; justify-content:space-between; align-items:start; margin-bottom:10px;">
+                            <h3 style="color:#f39c12; font-size:16px; margin:0; font-weight:800;">🧹 УБОРКА СНЕГА И НАЛЕДИ</h3>
+                            <span style="background:#f39c12; color:#fff; padding:4px 10px; border-radius:12px; font-size:11px; font-weight:700;">ВНИМАНИЕ</span>
+                        </div>
+                        <p style="font-size:13px; line-height:1.7; color:#333; margin-bottom:10px;">
+                            В связи с обильными снегопадами коммунальные службы проводят ежедневную уборку территорий. Просим жителей не парковать автомобили на проездах к контейнерным площадкам!
+                        </p>
+                        <p style="font-size:13px; color:#666; margin:0;">
+                            Заблокированный проезд мешает своевременному вывозу мусора и уборке снега. Нарушителям будут выписаны штрафы.
+                        </p>
+                        <div style="margin-top:12px; font-size:11px; color:#999;">Опубликовано: 12 декабря 2025 в 16:45</div>
+                    </div>
+                    
+                    <!-- Уведомление 5 - Поздравление -->
+                    <div style="background:linear-gradient(135deg, #fef5f9, #ffffff); border-radius:15px; padding:20px; margin-bottom:15px; border-left:5px solid #e91e63; box-shadow:0 3px 10px rgba(0,0,0,0.08);">
+                        <div style="display:flex; justify-content:space-between; align-items:start; margin-bottom:10px;">
+                            <h3 style="color:#e91e63; font-size:16px; margin:0; font-weight:800;">🎄 НОВОГОДНИЕ ПРАЗДНИКИ</h3>
+                            <span style="background:#e91e63; color:#fff; padding:4px 10px; border-radius:12px; font-size:11px; font-weight:700;">ПОЗДРАВЛЕНИЕ</span>
+                        </div>
+                        <p style="font-size:13px; line-height:1.7; color:#333; margin-bottom:10px;">
+                            Уважаемые жители! Коллектив УК «ВСЕ СВОИ» поздравляет вас с наступающим Новым годом и Рождеством!
+                        </p>
+                        <p style="font-size:13px; color:#666; margin:0;">
+                            <strong>Режим работы в праздники:</strong><br>
+                            31 декабря — сокращённый день (до 16:00)<br>
+                            1-3 января — выходные дни<br>
+                            4 января — возобновляем работу в обычном режиме<br>
+                            Аварийная служба работает круглосуточно!
+                        </p>
+                        <div style="margin-top:12px; font-size:11px; color:#999;">Опубликовано: 10 декабря 2025 в 11:00</div>
+                    </div>
+                    
+                </div>
+                
+                <!-- Кнопка назад -->
+                <div style="text-align:center; margin-top:25px;">
+                    <button class="ui-btn" style="background:#9b59b6; color:#fff; font-size:14px; padding:12px 40px;" onclick="window.openResidentDashboard()">
+                        ← ВЕРНУТЬСЯ В КАБИНЕТ
+                    </button>
+                </div>
+            </div>
+        `;
+        modal.style.display = "flex";
+    };
+
 
 window.openEcoGuide = () => {
     const cards = [
