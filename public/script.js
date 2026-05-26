@@ -446,6 +446,112 @@ const color = item.load < 33 ? '#00cc00' : (item.load < 66 ? '#ffa600' : '#ff330
         modal.style.display = "flex";
     };
     
+    // Экстренный вызов
+    window.openEmergencyModal = () => {
+        const sub = document.getElementById('sub-modal-body');
+        sub.innerHTML = `
+            <div class="emergency-popup" style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding:40px; text-align:center;">
+                <span class="emergency-icon" style="font-size:100px; animation:pulse 1s infinite;">🚨</span>
+                <h1 class="emergency-title" style="color:#e74c3c; font-size:40px; margin:20px 0;">ЭКСТРЕННЫЙ ВЫЗОВ!</h1>
+                <p class="emergency-message" style="font-size:18px; color:#666; margin-bottom:30px;">Выберите службу для вызова:</p>
+                
+                <div style="display:grid; grid-template-columns: 1fr 1fr; gap:15px; width:100%; max-width:500px;">
+                    <button class="ui-btn" style="background:linear-gradient(135deg, #e74c3c, #c0392b); color:#fff; padding:20px; font-size:16px;" onclick="window.callEmergency('+7 (921) 482-85-50', 'Аварийная служба')">
+                        🆘 АВАРИЙНАЯ<br>+7 (921) 482-85-50
+                    </button>
+                    <button class="ui-btn" style="background:linear-gradient(135deg, #3498db, #2980b9); color:#fff; padding:20px; font-size:16px;" onclick="window.callEmergency('+7 (921) 482-85-50', 'Диспетчерская')">
+                        📞 ДИСПЕТЧЕР<br>+7 (921) 482-85-50
+                    </button>
+                    <button class="ui-btn" style="background:linear-gradient(135deg, #f39c12, #e67e22); color:#fff; padding:20px; font-size:16px;" onclick="window.callEmergency('112', 'МЧС')">
+                        🔥 МЧС<br>112
+                    </button>
+                    <button class="ui-btn" style="background:linear-gradient(135deg, #9b59b6, #8e44ad); color:#fff; padding:20px; font-size:16px;" onclick="window.callEmergency('103', 'Скорая помощь')">
+                        🚑 СКОРАЯ<br>103
+                    </button>
+                </div>
+                
+                <button class="ui-btn" style="background:#f4f7f4; color:#333; width:100%; max-width:500px; padding:15px; margin-top:20px;" onclick="document.getElementById('sub-modal-body').style.display='none'">
+                    ОТМЕНИТЬ
+                </button>
+            </div>
+        `;
+        sub.style.display = "block";
+    };
+    
+    window.callEmergency = (number, service) => {
+        const sub = document.getElementById('sub-modal-body');
+        sub.innerHTML = `
+            <div class="calling-popup" style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding:40px; text-align:center;">
+                <span class="calling-icon" style="font-size:80px; animation:ring 0.5s infinite;">📞</span>
+                <h1 class="calling-title" style="color:#008000; font-size:35px; margin:20px 0;">ВЫЗОВ ${service}</h1>
+                <p class="calling-number" style="font-size:28px; color:#008000; font-weight:900; margin:20px 0;">${number}</p>
+                <p class="calling-message" style="font-size:16px; color:#666;">Нажмите кнопку ниже для звонка</p>
+                <a href="tel:${number.replace(/[^0-9+]/g, '')}" class="ui-btn" style="background:linear-gradient(135deg, #008000, #00aa44); color:#fff; padding:20px 60px; font-size:20px; text-decoration:none; display:inline-block; margin-top:20px;">
+                    📞 ПОЗВОНИТЬ
+                </a>
+                <button class="ui-btn" style="background:#f4f7f4; color:#333; padding:15px 40px; margin-top:15px;" onclick="document.getElementById('sub-modal-body').style.display='none'">
+                    ОТМЕНИТЬ
+                </button>
+            </div>
+        `;
+    };
+    
+    // Уведомления
+    window.notifications = [
+        {id: 1, title: 'Новое объявление', text: 'Плановые работы 15 декабря', time: '5 мин назад', read: false},
+        {id: 2, title: 'Счёт готов', text: 'Оплатите счёт за ноябрь', time: '1 час назад', read: false},
+        {id: 3, title: 'Вывоз мусора', text: 'График изменён на выходные', time: '2 часа назад', read: true}
+    ];
+    
+    window.showNotifications = () => {
+        const sub = document.getElementById('sub-modal-body');
+        const unreadCount = window.notifications.filter(n => !n.read).length;
+        
+        sub.innerHTML = `
+            <div class="notifications-popup" style="padding:30px; max-height:70vh; overflow-y:auto;">
+                <h1 style="color:#3498db; font-size:32px; margin-bottom:20px; text-align:center;">🔔 УВЕДОМЛЕНИЯ</h1>
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+                    <span style="font-size:14px; color:#666;">${unreadCount} новых</span>
+                    <button class="ui-btn" style="background:#f4f7f4; color:#333; padding:10px 20px; font-size:12px;" onclick="window.markAllRead()">✓ Все прочитаны</button>
+                </div>
+                
+                <div style="display:flex; flex-direction:column; gap:12px;">
+                    ${window.notifications.map(n => `
+                        <div class="notification-item" style="background:${n.read ? '#f9f9f9' : '#f0f7ff'}; padding:15px; border-radius:15px; border-left:4px solid ${n.read ? '#ddd' : '#3498db'}; transition:var(--transition);">
+                            <div style="display:flex; justify-content:space-between; align-items:start;">
+                                <div style="flex:1;">
+                                    <h3 style="margin:0 0 5px 0; font-size:15px; color:#333;">${n.title}</h3>
+                                    <p style="margin:0; font-size:13px; color:#666;">${n.text}</p>
+                                    <span style="font-size:11px; color:#999; margin-top:8px; display:block;">${n.time}</span>
+                                </div>
+                                ${!n.read ? '<span style="background:#3498db; width:10px; height:10px; border-radius:50%; flex-shrink:0;"></span>' : ''}
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+                
+                <button class="ui-btn" style="background:#f4f7f4; color:#333; width:100%; padding:15px; margin-top:20px;" onclick="document.getElementById('sub-modal-body').style.display='none'">
+                    ЗАКРЫТЬ
+                </button>
+            </div>
+        `;
+        sub.style.display = "block";
+    };
+    
+    window.markAllRead = () => {
+        window.notifications.forEach(n => n.read = true);
+        document.getElementById('notif-count').textContent = '0';
+        window.showNotifications();
+    };
+    
+    window.toggleNotifications = () => {
+        window.showNotifications();
+    };
+    
+    window.toggleFavorites = () => {
+        window.openSub('⭐ Избранное', 'Функция избранных объектов в разработке.<br><br>Здесь будут ваши любимые места на карте.');
+    };
+    
     // Функция входа в личный кабинет (демо)
     window.loginToPersonalCabinet = () => {
         const login = document.getElementById('lk-login').value;
