@@ -37,106 +37,148 @@
             <div class="loading-bar">
                 <div class="loading-progress"></div>
             </div>
-            <p class="loading-version">Версия 2.0 Pro</p>
+            <p class="loading-version">Версия 3.0 Ultimate</p>
         </div>
     </div>
     
     <!-- Контейнер карты -->
     <div id="map"></div>
     
-    <!-- Quick Actions Bar (Top Right) -->
-    <div class="quick-actions-bar">
-        <button class="quick-action-btn" onclick="window.toggleFavorites()" title="Избранное">⭐</button>
-        <button class="quick-action-btn" onclick="window.openEmergencyModal()" title="Экстренный вызов">🚨</button>
-        <button class="quick-action-btn" onclick="window.toggleNotifications()" title="Уведомления">🔔</button>
-        <button class="quick-action-btn notification-badge" id="notif-btn" onclick="window.showNotifications()" title="Показать уведомления">
-            <span class="badge-count" id="notif-count">0</span>
-            📬
+    <!-- ===== ВЕРХНЯЯ ПАНЕЛЬ (СЛЕВА) ===== -->
+    <div class="top-left-panel">
+        <!-- Кнопка УК -->
+        <button class="main-btn uk-btn" onclick="window.toggleCompanyPanel()" title="Управляющая компания">
+            <span class="btn-icon">🏢</span>
+            <span class="btn-label">УК</span>
+        </button>
+        
+        <!-- Кнопка Личного кабинета -->
+        <button class="main-btn lk-btn" onclick="openPersonalCabinet()" title="Личный кабинет">
+            <span class="btn-icon">👤</span>
+            <span class="btn-label">ЛК</span>
         </button>
     </div>
     
-    <!-- Кнопка УК (слева сверху) -->
-    <div id="uk-toggle-btn" class="uk-toggle-btn">🏢</div>
-    
-    <!-- Кнопка Личного кабинета (под кнопкой УК) -->
-    <div id="lk-toggle-btn" class="lk-toggle-btn" onclick="openPersonalCabinet()">👤</div>
-    
-    <!-- Weather Widget -->
-    <div class="weather-widget" id="weather-widget">
-        <div class="weather-icon">☀️</div>
-        <div class="weather-temp">+18°</div>
-        <div class="weather-desc">Ясно</div>
-    </div>
-    
-    <!-- News Ticker -->
-    <div class="news-ticker" id="news-ticker">
-        <div class="ticker-content">
-            <span class="ticker-item">📢 Объявление: Плановые работы 15 декабря с 10:00 до 14:00</span>
-            <span class="ticker-item">✅ Вывоз мусора производится ежедневно в 08:00</span>
-            <span class="ticker-item">🎄 Праздничные мероприятия во дворах 25 декабря</span>
-            <span class="ticker-item">💡 Новая функция: Подача показаний онлайн доступна 24/7</span>
+    <!-- ===== ВЕРХНЯЯ ПАНЕЛЬ (СПРАВА) ===== -->
+    <div class="top-right-panel">
+        <!-- Виджет погоды -->
+        <div class="weather-widget" id="weather-widget">
+            <div class="weather-main">
+                <span class="weather-icon">☀️</span>
+                <span class="weather-temp">+18°</span>
+            </div>
+            <div class="weather-details">
+                <span class="weather-desc">Ясно</span>
+                <span class="weather-location">Северодвинск</span>
+            </div>
+        </div>
+        
+        <!-- Быстрые действия -->
+        <div class="quick-actions">
+            <button class="action-btn favorites-btn" onclick="window.toggleFavorites()" title="Избранное">
+                <span>⭐</span>
+            </button>
+            <button class="action-btn emergency-btn" onclick="window.openEmergencyModal()" title="Экстренный вызов">
+                <span>🚨</span>
+            </button>
+            <button class="action-btn notifications-btn" onclick="window.showNotifications()" title="Уведомления">
+                <span>🔔</span>
+                <span class="badge-count" id="notif-count">0</span>
+            </button>
         </div>
     </div>
     
-    <!-- Панель управляющей компании (скрыта по умолчанию) -->
+    <!-- ===== НИЖНЯЯ ПАНЕЛЬ (СЛЕВА) ===== -->
+    <div class="bottom-left-panel">
+        <!-- Эко-панель -->
+        <div id="eco-panel-root" class="eco-panel">
+            <div class="eco-header" onclick="window.toggleEcoPanel()">
+                <span class="eco-icon">🌿</span>
+                <span class="eco-title">Экосистема</span>
+                <span class="eco-arrow">▼</span>
+            </div>
+            <div class="eco-content" id="eco-content">
+                <!-- Заполняется через JS -->
+            </div>
+        </div>
+        
+        <!-- Кнопка настроек -->
+        <button class="settings-btn" onclick="window.toggleSettings()" title="Настройки">
+            <span class="settings-icon">⚙️</span>
+        </button>
+    </div>
+    
+    <!-- ===== НИЖНЯЯ ПАНЕЛЬ (ЦЕНТР) ===== -->
+    <div class="bottom-center-panel">
+        <!-- Бегущая строка новостей -->
+        <div class="news-ticker" id="news-ticker">
+            <div class="ticker-track">
+                <span class="ticker-item">📢 Объявление: Плановые работы 15 декабря с 10:00 до 14:00</span>
+                <span class="ticker-separator">●</span>
+                <span class="ticker-item">✅ Вывоз мусора производится ежедневно в 08:00</span>
+                <span class="ticker-separator">●</span>
+                <span class="ticker-item">🎄 Праздничные мероприятия во дворах 25 декабря</span>
+                <span class="ticker-separator">●</span>
+                <span class="ticker-item">💡 Новая функция: Подача показаний онлайн доступна 24/7</span>
+                <span class="ticker-separator">●</span>
+                <span class="ticker-item">📱 Скачайте мобильное приложение УК «ВСЕ СВОИ»</span>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ===== НИЖНЯЯ ПАНЕЛЬ (СПРАВА) ===== -->
+    <div class="bottom-right-panel">
+        <!-- Кнопка масштаба -->
+        <div class="scale-control">
+            <span class="scale-value">500 м</span>
+        </div>
+    </div>
+    
+    <!-- ===== ПАНЕЛЬ УК ===== -->
     <div id="company-panel-root" class="company-panel company-panel-hidden">
-        <button class="company-close-btn" onclick="window.toggleCompanyPanel()">&times;</button>
-        <div class="company-header">
-            <div class="company-logo">🏢</div>
-            <div class="company-title">
+        <button class="panel-close-btn" onclick="window.toggleCompanyPanel()">×</button>
+        <div class="panel-header">
+            <div class="header-icon">🏢</div>
+            <div class="header-info">
                 <h2>УК «ВСЕ СВОИ»</h2>
-                <p>Ваш надёжный партнёр в управлении недвижимостью</p>
+                <p>Ваш надёжный партнёр</p>
             </div>
         </div>
-        <div class="company-content">
-            <div class="company-message">
-                <p class="message-text">💚 Мы ценим, что вы доверяете нам свой дом! Наша команда работает 24/7, чтобы вы жили комфортно и безопасно.</p>
+        <div class="panel-body">
+            <div class="welcome-message">
+                <p>💚 Мы ценим, что вы доверяете нам свой дом!</p>
             </div>
-            <div class="company-info-grid">
-                <div class="info-item">
-                    <span class="info-icon">📍</span>
-                    <div class="info-details">
-                        <strong>Адрес:</strong>
-                        <span>г. Северодвинск, ул. Советская, д. 1</span>
+            
+            <div class="info-section">
+                <div class="info-block">
+                    <div class="info-row">
+                        <span class="info-label">📍 Адрес:</span>
+                        <span class="info-value">г. Северодвинск, ул. Советская, д. 1</span>
                     </div>
-                </div>
-                <div class="info-item">
-                    <span class="info-icon">📞</span>
-                    <div class="info-details">
-                        <strong>Телефон:</strong>
-                        <span>+7 (921) 482-85-50</span>
+                    <div class="info-row">
+                        <span class="info-label">📞 Телефон:</span>
+                        <span class="info-value"><a href="tel:+79214828550">+7 (921) 482-85-50</a></span>
                     </div>
-                </div>
-                <div class="info-item">
-                    <span class="info-icon">✉️</span>
-                    <div class="info-details">
-                        <strong>Email:</strong>
-                        <span>info@ukvsesvoi.ru</span>
+                    <div class="info-row">
+                        <span class="info-label">✉️ Email:</span>
+                        <span class="info-value">info@ukvsesvoi.ru</span>
                     </div>
-                </div>
-                <div class="info-item">
-                    <span class="info-icon">🕐</span>
-                    <div class="info-details">
-                        <strong>Режим работы:</strong>
-                        <span>Пн-Пт: 8:00–20:00<br>Сб-Вс: 9:00–18:00</span>
+                    <div class="info-row">
+                        <span class="info-label">🕐 Режим работы:</span>
+                        <span class="info-value">Пн-Пт: 8:00–20:00<br>Сб-Вс: 9:00–18:00</span>
                     </div>
-                </div>
-                <div class="info-item">
-                    <span class="info-icon">🆘</span>
-                    <div class="info-details">
-                        <strong>Аварийная служба:</strong>
-                        <span>Круглосуточно</span>
+                    <div class="info-row">
+                        <span class="info-label">🆘 Аварийная:</span>
+                        <span class="info-value">Круглосуточно</span>
                     </div>
-                </div>
-                <div class="info-item">
-                    <span class="info-icon">👥</span>
-                    <div class="info-details">
-                        <strong>Обслуживаем:</strong>
-                        <span>11 домов, 1 247 квартир</span>
+                    <div class="info-row highlight">
+                        <span class="info-label">👥 Обслуживаем:</span>
+                        <span class="info-value">11 домов, 1 247 квартир</span>
                     </div>
                 </div>
             </div>
-            <div class="company-values">
+            
+            <div class="values-section">
                 <div class="value-badge">✅ Прозрачность</div>
                 <div class="value-badge">✅ Оперативность</div>
                 <div class="value-badge">✅ Качество</div>
@@ -144,10 +186,38 @@
         </div>
     </div>
     
-    <!-- Модальное окно о дипломном проекте -->
-    <div id="diploma-modal-overlay" class="modal-overlay" style="z-index: 30000;">
-        <div class="modal-win diploma-modal">
-            <button class="close-icon" onclick="closeDiplomaModal()">&times;</button>
+    <!-- ===== ПАНЕЛЬ НАСТРОЕК ===== -->
+    <div id="settings-panel-root" class="settings-panel">
+        <div class="settings-header">
+            <h3>⚙️ Настройки</h3>
+            <button class="close-btn" onclick="window.toggleSettings()">×</button>
+        </div>
+        <div class="settings-body" id="settings-body">
+            <!-- Заполняется через JS -->
+        </div>
+    </div>
+    
+    <!-- ===== ГЛАВНОЕ МОДАЛЬНОЕ ОКНО ===== -->
+    <div id="modal-overlay" class="modal-overlay">
+        <div class="modal-window">
+            <button class="modal-close-btn" onclick="window.closeModal()">×</button>
+            <div id="m-header" class="modal-header"></div>
+            <div id="m-content" class="modal-content"></div>
+        </div>
+    </div>
+    
+    <!-- ===== ДОПОЛНИТЕЛЬНОЕ МОДАЛЬНОЕ ОКНО ===== -->
+    <div id="sub-modal-overlay" class="modal-overlay sub-modal">
+        <div class="modal-window sub-modal-window">
+            <button class="modal-close-btn" onclick="document.getElementById('sub-modal-body').style.display='none'">×</button>
+            <div id="sub-modal-body" class="modal-content"></div>
+        </div>
+    </div>
+    
+    <!-- ===== МОДАЛЬНОЕ ОКНО ДИПЛОМА ===== -->
+    <div id="diploma-modal-overlay" class="modal-overlay diploma-modal-overlay">
+        <div class="modal-window diploma-modal">
+            <button class="modal-close-btn" onclick="closeDiplomaModal()">×</button>
             <div class="diploma-content">
                 <div class="diploma-header">
                     <span class="diploma-icon">🎓</span>
@@ -182,15 +252,5 @@
     
     <!-- Скрипт приложения -->
     <script src="script.js"></script>
-    
-    <!-- ✅ Обработка кликов вне элементов для закрытия панелей на мобильных -->
-    <script>
-    // Закрытие модального окна диплома при клике на overlay (кроме самого окна)
-    document.getElementById('diploma-modal-overlay')?.addEventListener('click', function(e) {
-        if (e.target === this) {
-            closeDiplomaModal();
-        }
-    });
-    </script>
 </body>
 </html>
