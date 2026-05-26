@@ -998,6 +998,14 @@ if (window.innerWidth > 768) {
         sBtn.classList.toggle('active', !open); 
     };
     
+    // Глобальная функция toggleSettings для кнопки в верхней панели
+    window.toggleSettings = () => {
+        const open = tBox.style.display === "block"; 
+        window.closeAllPanels();
+        tBox.style.display = open ? "none" : "block"; 
+        sBtn.classList.toggle('active', !open); 
+    };
+    
     secBtn.onclick = (e) => {
         e.stopPropagation();
         // Закрываем другие панели при открытии доп. настроек
